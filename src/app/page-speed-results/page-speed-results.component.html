@@ -1,18 +1,47 @@
+<button (click)="checkPS()">Check Page Performance</button>
+
 <h2>Destination Page: {{urlList.destinations.destination}}</h2>
 <table style="border:1px solid">
   <tr>
     <th style="border:1px solid">Date</th>
     <th style="border:1px solid">Performance Score</th>
-    <th style="border:1px solid">Loading Experience</th>
+    <th style="border:1px solid">First Contentful Paint</th>
+    <th style="border:1px solid">First Input Delay</th>
+    <th style="border:1px solid">Speed Index</th>
+    <th style="border:1px solid">Time To Interactive</th>
+    <th style="border:1px solid">First Meaningful Paint</th>
+    <th style="border:1px solid">First CPU Idle</th>
+    <th style="border:1px solid">Estimated Input Latency</th>
   </tr>
   <tr *ngFor="let item of data" >
     <td style="border:1px solid">
       {{ item.date }}
     </td>
     <td style="border:1px solid">
-      {{ item.score }}
-    </td><td style="border:1px solid">
-      {{ item.loadingExperience }}
+      {{ item.data.lighthouseMetrics['Performance Score'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.cruxMetrics['First Contentful Paint'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.cruxMetrics['First Input Delay'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.lighthouseMetrics['Speed Index'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.lighthouseMetrics['Time To Interactive'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.lighthouseMetrics['First Meaningful Paint'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.lighthouseMetrics['First CPU Idle'] }}
+    </td>
+    <td style="border:1px solid">
+      {{ item.data.lighthouseMetrics['Estimated Input Latency'] }}
     </td>
   </tr>
 </table>
+
+

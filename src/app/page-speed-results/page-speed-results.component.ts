@@ -32,23 +32,21 @@ export class PageSpeedResultsComponent implements OnInit {
   constructor(private pageSpeedService: PageSpeedServiceService) { }
 
   ngOnInit() {
-    //this.checkPS();
-    this.getPageData('destination');
+    this.getPageData('destination', 'mobile');
   }
   checkPS(): void {
     this.pageSpeedService.checkPagePerformance(this.urlList.destinations.destination, 'mobile');
   }
-  getPageData(pageType: string): void {
+  getPageData(pageType: string, device: string): void {
     const result = [];
-    this.pageSpeedService.getPSdata(pageType)
+    this.pageSpeedService.getPSdata(pageType, device)
       .subscribe(response => {
         Object.keys(response).forEach((currentItem) => {
-          const i = {
+          const test = {
             date: currentItem,
-            score: response[currentItem].lighthouseResult.score,
-            loadingExperience: response[currentItem].loadingExperience.overall_category
+            data: response[currentItem]
           };
-          result.push(i);
+          result.push(test);
         });
         this.data = result;
       });
