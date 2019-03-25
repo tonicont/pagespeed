@@ -9,16 +9,26 @@ import { PageSpeedServiceService } from '../page-speed-service.service';
 export class PageSpeedResultsComponent implements OnInit {
 
   data = [{
+    international: [],
+    country: [],
     destination : [],
     airline: [],
-    dynpack: []
+    dynpack: [],
+    cityPairs: [],
+    lowcost: [],
+    cheapFlights: [],
+    lastMinute: [],
+    weekends: [],
+    hotels: []
   }];
+  pageTypeList = [
+    'international', 'country', 'destination', 'cityPairs',
+    'airline', 'dynpack', 'lowcost', 'cheapFlights', 'lastminute', 'weekends', 'hotels'
+  ];
   constructor(private pageSpeedService: PageSpeedServiceService) { }
 
   ngOnInit() {
-    this.getPageData('destination', 'mobile');
-    this.getPageData('airline', 'mobile');
-    this.getPageData('dynpack', 'mobile');
+    this.pageTypeList.forEach((app) => this.getPageData(app, 'mobile'));
   }
   checkPS(): void {
     this.pageSpeedService.checkPagePerformance('mobile');

@@ -1,0 +1,47 @@
+section {
+  display: none;
+}
+
+input {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #abc;
+  border: 1px solid #abc;
+}
+
+label:before {
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+label:hover {
+  color: #789;
+  cursor: pointer;
+}
+
+input:checked + label {
+  color: red;
+  border: 1px solid #abc;
+  border-top: 2px solid red;
+}
+
+#tab1:checked ~ #international,
+#tab2:checked ~ #country,
+#tab3:checked ~ #destination,
+#tab4:checked ~ #cityPairs,
+#tab5:checked ~ #airline,
+#tab6:checked ~ #dynpack,
+#tab7:checked ~ #lowcost,
+#tab8:checked ~ #cheapFlights,
+#tab9:checked ~ #lastminute,
+#tab10:checked ~ #weekends,
+#tab11:checked ~ #hotels {
+  display: block;
+}

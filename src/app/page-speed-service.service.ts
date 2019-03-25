@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {hasOwnProperty} from 'tslint/lib/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +22,11 @@ export class PageSpeedServiceService {
     }],
     dynpack: [{
       dynpack: 'https://www.edreams.es/viajes/tenerife/',
-      cheapFlights: '',
+      cheapFlights: 'https://www.edreams.es/vuelos/baratos/',
       lowcost: 'https://www.edreams.es/lowcost/',
-      lastminute: '',
-      weekends: '',
-      hotels: ''
+      lastminute: 'https://www.edreams.es/ultima-hora/',
+      weekends: 'https://www.edreams.es/fin-de-semana/',
+      hotels: 'https://www.edreams.es/hoteles/madrid/'
     }]
   }];
 
@@ -35,8 +34,6 @@ export class PageSpeedServiceService {
 
   /**
    * This function launch a get petition to performance api and save the info.
-   * @param application
-   * @param page Page url to check
    * @param device String This parameter indicate in wich device we want to check. We can use 'desktop' or 'mobile'.
    */
   checkPagePerformance(device: string): void {

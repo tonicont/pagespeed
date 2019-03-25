@@ -1,147 +1,89 @@
 <button (click)="checkPS()">Check Page Performance</button>
+<div>
+  <input id="tab1" type="radio" name="tabs">
+  <label for="tab1">International</label>
 
-<h2>Destination Page: </h2>
-<table style="border:1px solid">
-  <tr>
-    <th style="border:1px solid">Date</th>
-    <th style="border:1px solid">Performance Score</th>
-    <th style="border:1px solid">First Contentful Paint</th>
-    <th style="border:1px solid">First Input Delay</th>
-    <th style="border:1px solid">Speed Index</th>
-    <th style="border:1px solid">Time To Interactive</th>
-    <th style="border:1px solid">First Meaningful Paint</th>
-    <th style="border:1px solid">First CPU Idle</th>
-    <th style="border:1px solid">Estimated Input Latency</th>
-    <th style="border:1px solid">Url</th>
-  </tr>
-  <tr *ngFor="let item of data.destination" >
-    <td style="border:1px solid">
-      {{ item.date }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Performance Score'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.cruxMetrics['First Contentful Paint'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.cruxMetrics['First Input Delay'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Speed Index'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Time To Interactive'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['First Meaningful Paint'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['First CPU Idle'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Estimated Input Latency'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.pageUrl }}
-    </td>
-  </tr>
-</table>
+  <input id="tab2" type="radio" name="tabs">
+  <label for="tab2">Country</label>
+
+  <input id="tab3" type="radio" name="tabs">
+  <label for="tab3">Destination</label>
+
+  <input id="tab4" type="radio" name="tabs">
+  <label for="tab4">City Pairs</label>
+
+  <input id="tab5" type="radio" name="tabs">
+  <label for="tab5">Airline</label>
+
+  <input id="tab6" type="radio" name="tabs">
+  <label for="tab6">Dynpack</label>
+
+  <input id="tab7" type="radio" name="tabs">
+  <label for="tab7">Lowcost</label>
+
+  <input id="tab8" type="radio" name="tabs">
+  <label for="tab8">CheapFligths</label>
+
+  <input id="tab9" type="radio" name="tabs">
+  <label for="tab9">LastMinute</label>
+
+  <input id="tab10" type="radio" name="tabs">
+  <label for="tab10">Weekend</label>
+
+  <input id="tab11" type="radio" name="tabs">
+  <label for="tab11">Hotels</label>
+
+  <section *ngFor="let pageType of pageTypeList" id="{{pageType}}">
+    <h2>{{pageType}} </h2>
+    <table style="border:1px solid">
+      <tr>
+        <th style="border:1px solid">Date</th>
+        <th style="border:1px solid">Performance Score</th>
+        <th style="border:1px solid">First Contentful Paint</th>
+        <th style="border:1px solid">First Input Delay</th>
+        <th style="border:1px solid">Speed Index</th>
+        <th style="border:1px solid">Time To Interactive</th>
+        <th style="border:1px solid">First Meaningful Paint</th>
+        <th style="border:1px solid">First CPU Idle</th>
+        <th style="border:1px solid">Estimated Input Latency</th>
+        <th style="border:1px solid">Url</th>
+      </tr>
+      <tr *ngFor="let item of data[pageType]" >
+        <td style="border:1px solid">
+          {{ item.date }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.lighthouseMetrics['Performance Score'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.cruxMetrics['First Contentful Paint'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.cruxMetrics['First Input Delay'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.lighthouseMetrics['Speed Index'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.lighthouseMetrics['Time To Interactive'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.lighthouseMetrics['First Meaningful Paint'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.lighthouseMetrics['First CPU Idle'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.lighthouseMetrics['Estimated Input Latency'] }}
+        </td>
+        <td style="border:1px solid">
+          {{ item.data.pageUrl }}
+        </td>
+      </tr>
+    </table>
+  </section>
+</div>
 
 
-<h2>Airline Page: </h2>
-<table style="border:1px solid">
-  <tr>
-    <th style="border:1px solid">Date</th>
-    <th style="border:1px solid">Performance Score</th>
-    <th style="border:1px solid">First Contentful Paint</th>
-    <th style="border:1px solid">First Input Delay</th>
-    <th style="border:1px solid">Speed Index</th>
-    <th style="border:1px solid">Time To Interactive</th>
-    <th style="border:1px solid">First Meaningful Paint</th>
-    <th style="border:1px solid">First CPU Idle</th>
-    <th style="border:1px solid">Estimated Input Latency</th>
-    <th style="border:1px solid">Url</th>
-  </tr>
-  <tr *ngFor="let item of data.airline" >
-    <td style="border:1px solid">
-      {{ item.date }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Performance Score'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.cruxMetrics['First Contentful Paint'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.cruxMetrics['First Input Delay'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Speed Index'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Time To Interactive'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['First Meaningful Paint'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['First CPU Idle'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Estimated Input Latency'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.pageUrl }}
-    </td>
-  </tr>
-</table>
 
-<h2>Dynpack Page: </h2>
-<table style="border:1px solid">
-  <tr>
-    <th style="border:1px solid">Date</th>
-    <th style="border:1px solid">Performance Score</th>
-    <th style="border:1px solid">First Contentful Paint</th>
-    <th style="border:1px solid">First Input Delay</th>
-    <th style="border:1px solid">Speed Index</th>
-    <th style="border:1px solid">Time To Interactive</th>
-    <th style="border:1px solid">First Meaningful Paint</th>
-    <th style="border:1px solid">First CPU Idle</th>
-    <th style="border:1px solid">Estimated Input Latency</th>
-    <th style="border:1px solid">Url</th>
-  </tr>
-  <tr *ngFor="let item of data.dynpack" >
-    <td style="border:1px solid">
-      {{ item.date }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Performance Score'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.cruxMetrics['First Contentful Paint'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.cruxMetrics['First Input Delay'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Speed Index'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Time To Interactive'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['First Meaningful Paint'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['First CPU Idle'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.lighthouseMetrics['Estimated Input Latency'] }}
-    </td>
-    <td style="border:1px solid">
-      {{ item.data.pageUrl }}
-    </td>
-  </tr>
-</table>
 
