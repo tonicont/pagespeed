@@ -7,35 +7,21 @@ import { PageSpeedServiceService } from '../page-speed-service.service';
   styleUrls: ['./page-speed-results.component.scss']
 })
 export class PageSpeedResultsComponent implements OnInit {
-  urlList = {
-    destinations: {
-      international: '',
-      country: '',
-      destination: 'http://www.edreams.es/vuelos/barcelona/BCN',
-      cityPairs: ''
-    },
-    airlines: {
-      index: '',
-      airline: '',
-      cityPair: ''
-    },
-    dynpack: {
-      destination: '',
-      cheapFlights: '',
-      lowcost: '',
-      lastminute: '',
-      weekends: '',
-      hotels: ''
-    }
-  };
-  data: any[];
+
+  data = [{
+    destination : [],
+    airline: [],
+    dynpack: []
+  }];
   constructor(private pageSpeedService: PageSpeedServiceService) { }
 
   ngOnInit() {
     this.getPageData('destination', 'mobile');
+    this.getPageData('airline', 'mobile');
+    this.getPageData('dynpack', 'mobile');
   }
   checkPS(): void {
-    this.pageSpeedService.checkPagePerformance(this.urlList.destinations.destination, 'mobile');
+    this.pageSpeedService.checkPagePerformance('mobile');
   }
   getPageData(pageType: string, device: string): void {
     const result = [];
@@ -48,7 +34,7 @@ export class PageSpeedResultsComponent implements OnInit {
           };
           result.push(test);
         });
-        this.data = result;
+        this.data[pageType] = result;
       });
   }
 }

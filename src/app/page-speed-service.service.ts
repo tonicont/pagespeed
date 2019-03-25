@@ -1,26 +1,66 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {hasOwnProperty} from 'tslint/lib/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageSpeedServiceService {
   apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+  dbUrlTESTING = 'https://releases-9ff4d.firebaseio.com/pagespeedTESTING/';
   dbUrl = 'https://releases-9ff4d.firebaseio.com/pagespeed/';
+  urlList = [{
+    destinations: [{
+      international: 'https://www.edreams.es/vuelos/internacionales/',
+      country: 'https://www.edreams.es/vuelos/espana/ES/',
+      destination: 'http://www.edreams.es/vuelos/barcelona/BCN',
+      cityPairs: 'https://www.edreams.es/vuelos/malaga-barcelona/AGP/BCN/'
+    }],
+    airlines: [{
+      index: '',
+      airline: 'https://www.edreams.es/ofertas/vuelos/aerolinea/FR/ryanair/',
+      routes: ''
+    }],
+    dynpack: [{
+      dynpack: 'https://www.edreams.es/viajes/tenerife/',
+      cheapFlights: '',
+      lowcost: 'https://www.edreams.es/lowcost/',
+      lastminute: '',
+      weekends: '',
+      hotels: ''
+    }]
+  }];
 
   constructor(private http: HttpClient) { }
 
   /**
    * This function launch a get petition to performance api and save the info.
-   * @param url Page url to check
+   * @param application
+   * @param page Page url to check
    * @param device String This parameter indicate in wich device we want to check. We can use 'desktop' or 'mobile'.
    */
-  checkPagePerformance(url: string, device: string): void {
-   fetch(this.apiUrl + '?url=' + url + '&strategy=' + device)
-     .then(response => response.json())
-     .then(json => {
-       this.saveData('destination', device, json);
-     });
+  checkPagePerformance(device: string): void {
+   this.urlList.forEach((urlList) => {
+     for (const app in urlList) {
+       if (urlList.hasOwnProperty(app)) {
+         for (const pageType in urlList[app]) {
+           if (urlList[app].hasOwnProperty(pageType)) {
+             for (const url in urlList[app][pageType]) {
+               if (urlList[app][pageType].hasOwnProperty(url)) {
+                 if (urlList[app][pageType][url] !== '') {
+                   fetch(this.apiUrl + '?url=' + urlList[app][pageType][url] + '&strategy=' + device)
+                     .then(response => response.json())
+                     .then(json => {
+                       this.saveData(url, device, json);
+                     });
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   } );
   }
 
   /**
@@ -54,10 +94,11 @@ export class PageSpeedServiceService {
       'Performance Score': lighthouse.categories['performance'].score
     };
     const d = {
+      pageUrl: lighthouse.finalUrl,
       cruxMetrics,
       lighthouseMetrics
     };
-    this.http.put( this.dbUrl + '/' + pageType + '/' + device + '/' + key + '/.json', d, httpOptions)
+    this.http.put( this.dbUrlTESTING + '/' + pageType + '/' + device + '/' + key + '/.json', d, httpOptions)
       .subscribe(response => console.log(response));
   }
 
@@ -67,6 +108,6 @@ export class PageSpeedServiceService {
    * @param device String.
    */
   getPSdata(pageType: string, device: string) {
-    return this.http.get(this.dbUrl + pageType + '/' + device + '/.json');
+    return this.http.get(this.dbUrlTESTING + pageType + '/' + device + '/.json');
   }
 }
