@@ -44,7 +44,13 @@ export class PageSpeedResultsComponent implements OnInit {
           };
           result.push(test);
         });
-        this.data[pageType] = result;
+        this.data[pageType] = result.sort((a, b) => {
+          let date1 = a.date.split('-');
+          let date2 = b.date.split('-');
+          date1 = new Date(date1[2], date1[1] - 1, date1[0]);
+          date2 = new Date(date2[2], date2[1] - 1, date2[0]);
+          return date1 < date2 ? -1 : (date1 > date2 ? 1 : 0);
+        });
       });
   }
 }
